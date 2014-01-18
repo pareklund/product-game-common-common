@@ -11,6 +11,7 @@ import java.util.Set;
 import playn.core.AssetWatcher;
 import playn.core.Json;
 import playn.core.PlayN;
+import playn.core.ResourceCallback;
 import playn.core.util.Callback;
 
 import com.anygine.core.common.client.inject.PlayNInjectorManager;
@@ -30,15 +31,15 @@ public abstract class ResourceInfoMap {
     resourceInfos = new HashMap<String, Info>();
 
     PlayNInjectorManager.getInjector().getAssetManager().getText(
-        FILE_PATH, new Callback<String>() {
+        FILE_PATH, new ResourceCallback<String>() {
       @Override
-      public void onFailure(Throwable err) {
+      public void error(Throwable err) {
         log().error(err.getMessage());
         throw new RuntimeException("Could not load resource meta info");
       }
 
       @Override
-      public void onSuccess(String resourceInfoText) {
+      public void done(String resourceInfoText) {
         parseContents(resourceInfoText);
       }
     });   
@@ -51,7 +52,7 @@ public abstract class ResourceInfoMap {
       assets.addAll(resourceInfos.get(name).getImages(levelIndex));
     }
     for (String asset : assets) {
-      watcher.add(PlayN.assets().getImageSync(asset));
+      watcher.add(PlayN.assets().getImage(asset));
     } 
     // TODO: Watch for sounds when that is available
   }

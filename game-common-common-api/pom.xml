@@ -17,6 +17,29 @@
   <description>Anygine Product Game Common Common API Component</description>
 
   <dependencies>
+    <dependency>
+      <groupId>com.anygine.common.common</groupId>
+      <artifactId>common-common-api</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>com.anygine.common.common</groupId>
+      <artifactId>common-common-entity-api</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>com.anygine.product.tool.entity</groupId>
+      <artifactId>tool-entity-codegen</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>com.googlecode.playn</groupId>
+      <artifactId>playn-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.google.inject</groupId>
+      <artifactId>guice</artifactId>
+    </dependency>
   </dependencies>
 
   <build>
@@ -26,7 +49,6 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>apt-maven-plugin</artifactId>
-				<version>1.0-alpha-4</version>
 				<executions>
 					<execution>
 						<goals>

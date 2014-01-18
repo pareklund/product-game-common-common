@@ -10,6 +10,7 @@ import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+import com.anygine.core.common.client.Profile_MetaModel;
 import playn.core.Json;
 import playn.core.PlayN;
 

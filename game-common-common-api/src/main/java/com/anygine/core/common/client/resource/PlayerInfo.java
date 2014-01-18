@@ -78,6 +78,7 @@ public class PlayerInfo<P extends Player<?, ?>>
 	// TODO: Fix
   @Override
   public Class<P> getKlass() {
-    return (Class<P>) Player.class;
+    throw new UnsupportedOperationException("Fix me!");
+//    return (Class<P>) Player.class;
   }
 }

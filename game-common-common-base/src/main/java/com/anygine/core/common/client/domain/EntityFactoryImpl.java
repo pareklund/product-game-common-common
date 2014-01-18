@@ -1,26 +1,23 @@
 package com.anygine.core.common.client.domain;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import playn.core.Json;
-import playn.core.Json.Object;
-
 import com.anygine.core.common.client.Profile;
 import com.anygine.core.common.client.Profile_Storable;
 import com.anygine.core.common.client.Session;
 import com.anygine.core.common.client.Session_Storable;
 import com.anygine.core.common.client.api.EntityFactory;
 import com.anygine.core.common.client.api.EntityService;
-import com.anygine.core.common.client.api.UniqueConstraintViolationException;
-import com.anygine.core.common.client.domain.Inventory_Storable;
 import com.anygine.core.common.codegen.api.EntityInternal;
 import com.anygine.core.common.codegen.api.JsonWritableInternal;
 import com.anygine.core.common.codegen.api.JsonWritableInternal.TypeOfData;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import playn.core.Json;
+import playn.core.Json.Object;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 // TODO: Code generate
 @Singleton
@@ -57,8 +54,6 @@ public class EntityFactoryImpl extends JsonWritableFactoryImpl implements Entity
       Class<JW> clazz, Object jsonObj) {
     Json.Object fields = jsonObj.getObject(TypeOfData.Object.name());
     switch (JsonWritableInternal.JsonType.valueOf(jsonObj.getString("type"))) {
-      case Inventory:
-        return (JW) new Inventory_Storable(fields);
       case Session:
         return (JW) new Session_Storable(fields);
       case Profile:
@@ -112,5 +107,11 @@ public class EntityFactoryImpl extends JsonWritableFactoryImpl implements Entity
   public <T> EntityInternal<T> newEntity(Class<T> clazz, Object jsonObj) {
     // TODO: Implement
     throw new UnsupportedOperationException("Not yet implemented");
+  }
+
+  @Override
+  public <T> EntityInternal<T> newEntity(Object jsonObj) {
+      return this.<T>newEntity(
+              entityService.<T>getEntityClass(jsonObj), jsonObj);
   }
 }

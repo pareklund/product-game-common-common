@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import playn.core.PlayN;
+import playn.core.ResourceCallback;
 import playn.core.Sound;
 import playn.core.util.Callback;
 
@@ -69,13 +70,8 @@ public class SoundWithPath implements Sound {
   }
 
   @Override
-  public void addCallback(Callback<? super Sound> callback) {
+  public void addCallback(ResourceCallback<? super Sound> callback) {
     sound.addCallback(callback);
-  }
-
-  @Override
-  public boolean prepare() {
-    return sound.prepare();
   }
 
   @Override

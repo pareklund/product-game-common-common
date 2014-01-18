@@ -1,28 +1,24 @@
 package com.anygine.core.common.client.domain;
 
-import playn.core.Json;
-import playn.core.Json.Object;
-
 import com.anygine.core.common.client.Profile_Storable;
 import com.anygine.core.common.client.Session_Storable;
 import com.anygine.core.common.client.api.EntityFactory;
 import com.anygine.core.common.client.api.EntityService;
 import com.anygine.core.common.client.api.EntityStorage;
-import com.anygine.core.common.client.api.JsonWritableFactory;
 import com.anygine.core.common.client.api.UniqueConstraintViolationException;
-import com.anygine.core.common.client.domain.Inventory_Storable;
-import com.anygine.core.common.client.domain.impl.Entity;
 import com.anygine.core.common.codegen.api.EntityInternal;
 import com.anygine.core.common.codegen.api.JsonWritableInternal;
 import com.anygine.core.common.codegen.api.JsonWritableInternal.TypeOfData;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import playn.core.Json;
+import playn.core.Json.Object;
 
 @Singleton
 public class EntityServiceImpl extends JsonWritableServiceImpl implements EntityService {
 
-  private final EntityStorage storage;
-  private final EntityFactory factory;
+  protected final EntityStorage storage;
+  protected final EntityFactory factory;
 
   @Inject
   protected EntityServiceImpl(
@@ -34,7 +30,7 @@ public class EntityServiceImpl extends JsonWritableServiceImpl implements Entity
   // TODO: Possibly handle version checking here or in corr. storage class
   @Override
   public <T> EntityInternal<T> getInstance(Class<T> clazz, Object entityObj) {
-    TypeOfData typeOfData = 
+    TypeOfData typeOfData =
         TypeOfData.valueOf(entityObj.getString("typeOfData"));
     switch (typeOfData) {
       case Object:
@@ -71,14 +67,12 @@ public class EntityServiceImpl extends JsonWritableServiceImpl implements Entity
   @Override
   public <JW extends JsonWritableInternal> Class<JW> getClass(Object jsonObj) {
     switch (JsonWritableInternal.JsonType.valueOf(jsonObj.getString("type"))) {
-      case Inventory:
-        return (Class<JW>) Inventory_Storable.class;
       case Session:
         return (Class<JW>) Session_Storable.class;
       case Profile:
         return (Class<JW>) Profile_Storable.class;
-        default:
-          return super.getClass(jsonObj);
+      default:
+        return super.getClass(jsonObj);
     }
   }
 
@@ -86,5 +80,11 @@ public class EntityServiceImpl extends JsonWritableServiceImpl implements Entity
   public <T> Class<T> getEntityClass(Object jsonObj) {
     // TODO: Implement
     throw new UnsupportedOperationException("Not yet implemented");
+  }
+
+  @Override
+  public <T> EntityInternal<T> getInstance(Object entityObj) {
+    return this.<T>getInstance(
+            this.<T>getEntityClass(entityObj), entityObj);
   }
 }

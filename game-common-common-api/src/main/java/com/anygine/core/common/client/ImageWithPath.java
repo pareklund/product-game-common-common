@@ -3,6 +3,7 @@ package com.anygine.core.common.client;
 import playn.core.Image;
 import playn.core.Pattern;
 import playn.core.PlayN;
+import playn.core.ResourceCallback;
 import playn.core.gl.GL20;
 import playn.core.util.Callback;
 
@@ -15,13 +16,13 @@ public class ImageWithPath implements Image {
   private String path;
 
   public ImageWithPath(String path) {
-    this.image = PlayN.assets().getImageSync(path);
+    this.image = PlayN.assets().getImage(path);
     this.path = path;
   }
 
   // TODO: Use this to (re-)set transient field after setting/updating path
   protected static Image getImage(String path) {
-    return PlayN.assets().getImageSync(path);
+    return PlayN.assets().getImage(path);
   }
 
   /*
@@ -56,7 +57,7 @@ public class ImageWithPath implements Image {
   }
 
   @Override
-  public void addCallback(Callback<? super Image> callback) {
+  public void addCallback(ResourceCallback<? super Image> callback) {
     image.addCallback(callback);
   }
 

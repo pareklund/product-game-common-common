@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+
+import com.anygine.core.common.client.domain.Tile;
 import playn.core.Json.Object;
 
-public class RandomTileInfo extends TileInfo {
+public class RandomTileInfo extends TileInfo<Tile<?>> {
 
 	private final int variants;
 	

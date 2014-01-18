@@ -31,6 +31,7 @@ public class TileInfo<T extends Tile<?>>
 
   @Override
   public Class<T> getKlass() {
-    return Tile.class;
+    throw new UnsupportedOperationException("Fix me!");
+//    return (Class<T>) Tile.class;
   }
 }

@@ -8,8 +8,6 @@ import com.anygine.core.common.client.Animation_Embeddable;
 import com.anygine.core.common.client.ImageWithPath_Embeddable;
 import com.anygine.core.common.client.SoundWithPath_Embeddable;
 import com.anygine.core.common.client.api.JsonWritableService;
-import com.anygine.core.common.client.domain.Effect_Embeddable;
-import com.anygine.core.common.client.domain.GameComponentState_Embeddable;
 import com.anygine.core.common.client.geometry.Rectangle_Embeddable;
 import com.anygine.core.common.client.geometry.Vector2_Embeddable;
 import com.anygine.core.common.codegen.api.JsonWritableInternal;
@@ -33,11 +31,6 @@ public class JsonWritableServiceImpl implements JsonWritableService {
       return (Class<JW>) AnimationPlayer_Embeddable.class;
     case Vector2:
       return (Class<JW>) Vector2_Embeddable.class;
-    case Effect:
-      return (Class<JW>) Effect_Embeddable.class;
-    case AmmoSupply:
-      throw new UnsupportedOperationException("Not yet implemented");
-      //        return (Class<JW>) GunBase.AmmoSupply.class;
     case SoundWithPath:
       return (Class<JW>) SoundWithPath_Embeddable.class;
     default:
