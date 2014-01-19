@@ -3,7 +3,8 @@ package com.anygine.core.common.client.domain;
 import com.anygine.core.common.client.geometry.Vector2;
 
 public abstract class ActorBase
-  <S extends GameComponentState, L extends Level<?, ?>>
+  <S extends GameComponentState,
+   L extends Level<?, ?>>
   extends GameComponentBase<S, L> 
   implements Actor<S, L> {
 
