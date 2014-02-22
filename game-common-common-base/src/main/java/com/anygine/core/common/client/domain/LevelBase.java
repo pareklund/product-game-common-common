@@ -1,34 +1,31 @@
 package com.anygine.core.common.client.domain;
 
-import static playn.core.PlayN.graphics;
-import static playn.core.PlayN.json;
-import playn.core.Json;
-
+import com.anygine.common.SelfProvider;
 import com.anygine.core.common.client.annotation.Field;
 import com.anygine.core.common.client.annotation.Storable;
-import com.anygine.core.common.client.domain.GameComponent;
-import com.anygine.core.common.client.domain.GameComponentFactory;
-import com.anygine.core.common.client.domain.GameComponentState;
-import com.anygine.core.common.client.domain.Level;
-import com.anygine.core.common.client.domain.Player;
-import com.anygine.core.common.client.domain.Tile;
 import com.anygine.core.common.client.geometry.MathHelper;
 import com.anygine.core.common.client.geometry.Rectangle;
 import com.anygine.core.common.client.geometry.Vector2;
 import com.anygine.core.common.client.inject.GameplayCommonInjector;
 import com.anygine.core.common.client.inject.GameplayCommonInjectorManager;
 import com.anygine.core.common.client.input.Input;
-import com.anygine.core.common.client.resource.PlayerInfo;
 import com.anygine.core.common.client.resource.Info;
+import com.anygine.core.common.client.resource.PlayerInfo;
 import com.anygine.core.common.client.resource.ResourceInfoMap;
 import com.anygine.core.common.client.resource.TileInfo;
+import playn.core.Json;
+
+import static playn.core.PlayN.graphics;
+import static playn.core.PlayN.json;
 
 // TODO: Separate out sound handling to renderer class or correspondingly
 @Storable
 public abstract class LevelBase
-  <GC extends GameComponent<?, ?>, 
-  P extends Player<?, ? super Level<?, ?>>>
-  implements Level<GC, P> {
+  <GC extends GameComponent<S, L>,
+   P extends Player<S, L>,
+   L extends Level<GC, P>,
+   S extends GameComponentState>
+  implements Level<GC, P>, SelfProvider<L> {
 
   protected final transient GameComponentFactory gameComponentFactory;
   protected final transient ResourceInfoMap resourceInfoMap;
@@ -70,7 +67,7 @@ public abstract class LevelBase
     loadLevel(levelJson);
 
     entering = true;
-    player.onLevelEntered(this);
+    player.onLevelEntered(getThis());
   }
   
   @Override
@@ -314,7 +311,7 @@ public abstract class LevelBase
     }
     start = Rectangle.GetBottomCenter(getTileBounds(x, y));
     // TODO: Avoid casting
-    player.placeInLevel(this, start);
+    player.placeInLevel(getThis(), start);
     return gameComponentFactory.createTile(
         this, x, y, (TileInfo) resourceInfoMap.getByName(
             ResourceInfoMap.EMPTY_TILE_ID));

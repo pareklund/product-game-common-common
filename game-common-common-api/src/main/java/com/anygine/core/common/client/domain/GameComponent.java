@@ -8,9 +8,9 @@ import com.anygine.core.common.client.geometry.Vector2;
 import com.anygine.core.common.client.input.Input;
 
 public interface GameComponent
-  <S extends GameComponentState, L extends Level<?, ?>> 
+  <S extends GameComponentState, L extends Level<?, ?>>
   extends Resource {
-  S newState(); 
+  S newState();
 	String getName();
 	void dispose();
 	Vector2 getPosition();

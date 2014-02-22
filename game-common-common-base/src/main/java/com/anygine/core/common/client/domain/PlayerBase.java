@@ -8,7 +8,10 @@ import com.anygine.core.common.client.input.Input;
 import com.anygine.core.common.inject.CoreCommonInjectorManager;
 
 public abstract class PlayerBase
-  <S extends GameComponentState, L extends Level<?, ?>> 
+  <
+    S extends GameComponentState,
+    L extends Level<?, ?>
+    >
   extends ActorBase<S, L> 
   implements Player<S, L> {
 

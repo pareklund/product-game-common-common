@@ -6,7 +6,8 @@ import com.anygine.core.common.client.geometry.Vector2;
 
 @Storable
 public interface Player
-  <S extends GameComponentState, L extends Level<?, ?>>
+  <S extends GameComponentState,
+   L extends Level<?, ?>>
   extends Actor<S, L> 
 {
   void reset(Vector2 position);

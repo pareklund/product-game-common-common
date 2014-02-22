@@ -11,7 +11,8 @@ import com.anygine.core.common.client.input.Input;
 import com.google.inject.Inject;
 
 public class GameComponentBase
-  <S extends GameComponentState, L extends Level<?, ?>> 
+  <S extends GameComponentState,
+   L extends Level<?, ?>>
   implements GameComponent<S, L> {
 
   @Inject

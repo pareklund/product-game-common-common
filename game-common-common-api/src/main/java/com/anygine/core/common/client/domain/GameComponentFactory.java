@@ -31,7 +31,7 @@ public abstract class GameComponentFactory {
   L extends Level<?, ?>,
   A extends Actor<?, ?>>
   void createResource(
-      Collection<GC> collection, L level, Vector2 position, 
+      Collection<? extends GC> collection, L level, Vector2 position,
       Info<GC> resourceInfo, A owner);
 
   public
@@ -39,7 +39,7 @@ public abstract class GameComponentFactory {
   L extends Level<?, ?>,
   A extends Actor<?, ?>>
   void createResource(
-      Collection<GC> collection, L level, Vector2 position, String name, A owner) {
+      Collection<? extends GC> collection, L level, Vector2 position, String name, A owner) {
     createResource(
         collection, level, position,  
         (Info<GC>) resourceInfoMap.getByName(name), owner);

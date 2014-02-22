@@ -57,7 +57,7 @@ public class ImageWithPath implements Image {
   }
 
   @Override
-  public void addCallback(ResourceCallback<? super Image> callback) {
+  public void addCallback(Callback<? super Image> callback) {
     image.addCallback(callback);
   }
 

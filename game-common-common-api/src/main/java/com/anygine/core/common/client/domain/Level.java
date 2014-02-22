@@ -6,9 +6,7 @@ import com.anygine.core.common.client.input.Input;
 
 public interface Level
   <GC extends GameComponent<?, ?>,
-//   P extends Player<?, ? super Level<?, ?>>>
-        P extends Player<?, ?>>
-        {
+   P extends Player<?, ?>> {
   String getName();
   // Width of level measured in tiles.
   int getWidth();

@@ -78,7 +78,8 @@ public class Profile {
     return imageWithPath.getImage();
   }
 
-  ImageWithPath getImageWithPath() {
+  // TODO: Try to enforce default access
+  public ImageWithPath getImageWithPath() {
     return imageWithPath;
   }
   
